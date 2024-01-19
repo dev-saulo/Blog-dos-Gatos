@@ -1,0 +1,247 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+}
+
+:root {
+    font-size: 62.5%;
+    --primary-color: hsl(195, 46%, 40%);
+    --secondary-color: hsl(195, 95%, 25%);
+    --dark: #202024;
+}
+
+/*DEFINIÇÃO DO LAYOUT DA PAG POR GRID-TEMPLATE*/
+#app {
+    display: grid;
+    grid-template:
+    "header header"
+    "main main"
+    "aside aside"
+    "footer footer";
+}
+
+body {
+    color: var(--dark);
+    font-size: 1.6rem;
+    font-family: 'Mulish', sans-serif;
+}
+
+/*ESTILIZAÇÃO DO HEADER*/
+header {
+    background-color: var(--secondary-color);
+    grid-area: header;
+    padding: 1.2rem 2.8rem;
+    width: 100%;
+}
+
+header .content {
+    display: flex;
+    align-items: center;
+}
+
+header form {
+    flex: 1;
+    font-family: 'Mulish', sans-serif;
+
+}
+
+header form input {
+    border: 0;
+    font-family: 'Mulish', sans-serif;
+    background-color: var(--primary-color);
+    border-radius: .4rem;
+    color: white;
+    display: block;
+    margin: 0 auto;
+    padding: 0 1.4rem;
+    width: 90%;
+    height: 4rem;
+}
+
+header form input::placeholder {
+    color: white;
+}
+
+header form label {
+    position: absolute; /*posiciona um elemento de forma absoluta em relação ao seu contêiner pai */
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+}
+
+.avatar {
+    width: 4.2rem;
+    height: 4.2rem;
+    border-radius: 9.9rem;
+}
+
+/*ESTILIZAÇÃO DO MAIN*/
+main {
+    grid-area: main;
+}
+
+main p {
+    line-height: 160%;
+}
+
+main p + p { /*seleciona o segundo elemento se ele é imediatamente precedido pelo primeiro elemento e ambos têm o mesmo pai.*/
+    margin-top: 2.5rem;
+}
+
+.container {
+    padding: 0 2.2rem;
+}
+
+.titulo {
+    margin: 3.4rem 0;
+}
+
+.titulo h1 {
+    font-size: 2.4rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.cat-img {
+    border-radius: 0  0 .5rem .5rem;
+    overflow: hidden;
+    width: 100%;
+}
+
+.likes a {
+    background-color: var(--secondary-color);
+    display: inline-block;
+    margin-right: 1rem;
+    padding: 1rem;
+    line-height: 50%;
+    border-radius: 50%;
+    transition: all .2s ease-in;
+}
+
+.likes a:hover {
+    background-color: var(--primary-color);
+}
+
+/*ESTILIZAÇÃO DO ASIDE*/
+aside {
+    grid-area: aside;
+}
+
+aside h2 {
+    margin: 3.4rem 0;
+}
+
+aside .articles a {
+    color: var(--dark);
+    text-decoration: none;
+    display: flex;
+}
+
+aside .articles img {
+    border-radius: .5rem;
+    margin-right: 1.6rem;
+    transition: all .1s ease;
+    width: 15rem;
+}
+
+aside .articles h3 {
+    grid-area: h3;
+    font-size: 1.8rem;
+}
+
+aside .articles p {
+    font-size: 1.4rem;
+}
+
+.articles li + li {
+    margin-top: 3.2rem;
+}
+
+.articles img:hover {
+    filter: hue-rotate(7deg) contrast(101%) saturate(200%) ;
+    transform: scale(1.01) ;
+    transition-property: transform, filter; /*escolha em qual propriedade que aplicar a transição*/
+    transition-duration: 0.5s; /*duração para acontecer a transição*/
+    transition-timing-function: ease-in;
+}
+
+/*ESTILIZAÇÃO DO FOOTER*/
+footer {
+    background-color: var(--primary-color);
+    margin-top: 6.5rem;
+    padding: 2rem 0;
+    grid-area: footer;
+}
+
+footer p {
+    color: white;
+    text-align: center;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+}
+
+/* media queryes */
+@media (min-width: 900px) {
+    #app {
+        grid-template:
+        "header header"
+        "main aside"
+        "footer footer";
+    }
+    main {
+        justify-self: end;
+        margin-top: 4.4rem;
+        width: 60rem;
+    }
+    header {
+        justify-self: start;
+    }
+    header .content {
+        margin: 0 auto;
+        max-width: 115rem;
+    }
+    main img.cat-img {
+        padding: 0 2.2rem;;
+    }
+    aside {
+        justify-self: start;
+        margin-top: 4.4rem;
+        width: 38.4rem;
+    }
+    aside h2 {
+        margin-top: 0;
+    }
+}
+@media (min-width: 1200px) { /*Não usa o grid-template pois usa o formato do @media (min-width: 900px)*/
+    main {
+        width: 80rem;
+    }
+    .titulo {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+header {
+    --startY: -100%; /*o conteudo do header inicia a -100% da página*/
+    animation: move .2s;
+}
+
+footer {
+    --startY: 100%; /*o conteudo do footer inicia a 100% da página*/
+    animation: move .2s;
+}
+
+@keyframes move {
+    from {
+        transform: translateY(var(--startY)); /*Chamando a função do header e do footer*/
+    }
+}
